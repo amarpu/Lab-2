@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<robot name="table">
+
+  <!-- Colors given in the problem -->
+  <material name="brown">
+    <color rgba="0.54 0.27 0.07 1.0"/>
+  </material>
+  <material name="light_grey">
+    <color rgba="0.8 0.8 0.8 1.0"/>
+  </material>
+
+  <!-- Set frame as the world -->
+  <link name="world"/>
+
+  <!-- Top  surface of the table -->
+  <link name="top">
+    <visual>
+      <origin xyz="0 0 -0.01" rpy="0 0 0"/>
+      <geometry>
+        <box size="2 1 0.05"/>
+      </geometry>
+      <material name="brown"/>
+    </visual>
+  </link>
+
+  <!-- Set the top surface -->
+  <joint name="world_to_top" type="fixed">
+    <parent link="world"/>
+    <child link="top"/>
+    <origin xyz="0 0 1.0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Lefs of the table which are cylinders (Diagram showed diamter as 10cm) -->
+  <link name="leg1">
+    <visual>
+      <origin xyz="0 0 -0.475" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="1"/>
+      </geometry>
+      <material name="light_grey"/>
+    </visual>
+  </link>
+
+  <link name="leg2">
+    <visual>
+      <origin xyz="0 0 -0.475" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="1"/>
+      </geometry>
+      <material name="light_grey"/>
+    </visual>
+  </link>
+
+  <link name="leg3">
+    <visual>
+      <origin xyz="0 0 -0.475" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="1"/>
+      </geometry>
+      <material name="light_grey"/>
+    </visual>
+  </link>
+
+  <link name="leg4">
+    <visual>
+      <origin xyz="0 0 -0.475" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="1"/>
+      </geometry>
+      <material name="light_grey"/>
+    </visual>
+  </link>
+
+  <!-- Fixing the Joints -->
+  <joint name="top_to_leg1" type="fixed">
+    <parent link="top"/>
+    <child link="leg1"/>
+    <origin xyz="1 0.45 -0.05" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="top_to_leg2" type="fixed">
+    <parent link="top"/>
+    <child link="leg2"/>
+    <origin xyz="1 -0.45 -0.05" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="top_to_leg3" type="fixed">
+    <parent link="top"/>
+    <child link="leg3"/>
+    <origin xyz="-1 0.45 -0.05" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="top_to_leg4" type="fixed">
+    <parent link="top"/>
+    <child link="leg4"/>
+    <origin xyz="-1 -0.45 -0.05" rpy="0 0 0"/>
+  </joint>
+
+</robot>
