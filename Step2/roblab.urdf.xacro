@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="roblab">
+
+  <!-- Given files -->
+  <xacro:include filename="materials.xacro" />
+  <xacro:include filename="rrbot_macro.xacro" />
+  <xacro:include filename="table_macro.xacro" />
+
+  <!-- Frame -->
+  <link name="world" />
+
+  <xacro:table prefix="t1_" parent="world">
+     <origin xyz="0 0 1.0" rpy="0 0 0" />
+  </xacro:table>
+
+  <!-- Top Frame -->
+  <xacro:rrbot prefix="t1_r1_" parent="t1_top">
+    <origin xyz="1 0.5 0" rpy="0 0 0" />
+  </xacro:rrbot>
+
+  <xacro:rrbot prefix="t1_r2_" parent="t1_top">
+    <origin xyz="-1 -0.5 0" rpy="0 0 ${degrees(180)}" />
+  </xacro:rrbot>
+
+  <xacro:table prefix="t2_" parent="world">
+    <origin xyz="2 0 1" rpy="0 0 0" />
+  </xacro:table>
+
+  <xacro:rrbot prefix="t2_r1_" parent="t2_top">
+    <origin xyz="0 0 0" rpy="0 0 ${degrees(90)}" />
+  </xacro:rrbot>
+
+  <xacro:table prefix="t3_" parent="world">
+    <origin xyz="0 2 1" rpy="0 0 0" />
+  </xacro:table>
+
+  <xacro:rrbot prefix="t3_r1_" parent="t3_top">
+    <origin xyz="0.5 0 0" rpy="0 0 0" />
+  </xacro:rrbot>
+
+  <xacro:rrbot prefix="t3_r2_" parent="t3_top">
+    <origin xyz="-0.5 0 0" rpy="0 0 ${degrees(180)}" />
+  </xacro:rrbot>
+
+  <xacro:rrbot prefix="t3_r3_" parent="t3_top">
+    <origin xyz="0 0.5 0" rpy="0 0 ${degrees(90)}" />
+  </xacro:rrbot>
+
+</robot>

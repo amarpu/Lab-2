@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="table">
+
+  <!-- Xacro files here -->
+  <xacro:include filename="table_macro.xacro" />
+
+  <!-- Create the frame -->
+  <link name="world" />
+
+  <!-- -Table Formation -->
+  <xacro:table prefix="table_"  parent="world">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+  </xacro:table>
+
+</robot>
+

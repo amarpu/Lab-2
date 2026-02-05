@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro" name="table">
 
+    <!-- Given Files -->
     <xacro:include filename="materials.xacro" />
     <xacro:include filename="table_macro.xacro" />
     <xacro:include filename="rrbot_macro.xacro" />

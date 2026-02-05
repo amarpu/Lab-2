@@ -1,0 +1,64 @@
+<?xml vexrsion="1.0"?>
+<robot xmlns:xacro="https://wiki.ros.org/xacro">
+
+  <!-- Table Parameters given in the question -->
+  <xacro:macro name="table" params="prefix parent *origin">
+
+    <!-- Table Dimensions -->
+    <xacro:property name="table_width" value="1" />
+    <xacro:property name="table_height" value="1" />
+    <xacro:property name="table_length" value="2" />
+    <xacro:property name="table_thickness" value="0.05" />
+
+    <!-- Given Constraints -->
+    <xacro:property name="leg_length" value="${table_height - table_thickness}" />
+    <xacro:property name="leg_radius" value="0.05" />
+
+    <!-- Joint connecting table top to frame -->
+    <joint name="${prefix}table_joint" type="fixed">
+      <xacro:insert_block name="origin"/>
+      <parent link="${parent}"/>
+      <child link="${prefix}top"/>
+    </joint>
+
+    <!-- Table top link -->
+    <link name="${prefix}top">
+      <visual>
+        <origin xyz="0 0 ${-table_thickness/2}" rpy="0 0 0"/>
+        <geometry>
+          <box size="${table_length} ${table_width} ${table_thickness}"/>
+        </geometry>
+        <material name="brown"/>
+      </visual>
+    </link>
+	    
+    <!-- Tangent to the sides -->
+    <xacro: value="${table_length/2 - leg_radius}" />
+    <xacro: value="${table_width/2 - leg_radius}" />
+
+    <!-- Leg macro -->
+    <xacro:macro name="leg" params="name x y">
+      <link name="${prefix}${name}">
+        <visual>
+          <origin xyz="0 0 ${-leg_length/2}" rpy="0 0 0"/>
+          <geometry>
+            <cylinder radius="${leg_radius}" length="${leg_length}"/>
+          </geometry>
+          <material name="light_grey"/>
+        </visual>
+      </link>
+
+      <joint name="${prefix}${name}_joint" type="fixed">
+        <parent link="${prefix}top"/>
+        <child link="${prefix}${name}"/>
+      </joint>
+    </xacro:macro>
+
+    <!-- Four legs -->
+    <xacro:leg name="leg1" />
+    <xacro:leg name="leg2" />
+    <xacro:leg name="leg3" />
+    <xacro:leg name="leg4" />
+
+  </xacro:macro>
+</robot>
