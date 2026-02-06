@@ -3,6 +3,7 @@
 
   <!-- Xacro files here -->
   <xacro:include filename="table_macro.xacro" />
+  <xacro:include filename="materials.xacro" />
 
   <!-- Create the frame -->
   <link name="world" />

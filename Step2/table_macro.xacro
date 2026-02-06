@@ -1,5 +1,5 @@
-<?xml vexrsion="1.0"?>
-<robot xmlns:xacro="https://wiki.ros.org/xacro">
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <!-- Table Parameters given in the question -->
   <xacro:macro name="table" params="prefix parent *origin">
@@ -24,6 +24,7 @@
     <!-- Table top link -->
     <link name="${prefix}top">
       <visual>
+        <!-- top frame is centered on the TOP surface -->
         <origin xyz="0 0 ${-table_thickness/2}" rpy="0 0 0"/>
         <geometry>
           <box size="${table_length} ${table_width} ${table_thickness}"/>
@@ -31,15 +32,17 @@
         <material name="brown"/>
       </visual>
     </link>
-	    
+
     <!-- Tangent to the sides -->
-    <xacro: value="${table_length/2 - leg_radius}" />
-    <xacro: value="${table_width/2 - leg_radius}" />
+    <xacro:property name="x_off" value="${table_length/2 - leg_radius}" />
+    <xacro:property name="y_off" value="${table_width/2 - leg_radius}" />
 
     <!-- Leg macro -->
     <xacro:macro name="leg" params="name x y">
+
       <link name="${prefix}${name}">
         <visual>
+          <!-- leg frame is at TOP of leg -->
           <origin xyz="0 0 ${-leg_length/2}" rpy="0 0 0"/>
           <geometry>
             <cylinder radius="${leg_radius}" length="${leg_length}"/>
@@ -51,14 +54,19 @@
       <joint name="${prefix}${name}_joint" type="fixed">
         <parent link="${prefix}top"/>
         <child link="${prefix}${name}"/>
+        <!-- put leg TOP at underside of tabletop -->
+        <origin xyz="${x} ${y} ${-table_thickness}" rpy="0 0 0"/>
       </joint>
+
     </xacro:macro>
 
-    <!-- Four legs -->
-    <xacro:leg name="leg1" />
-    <xacro:leg name="leg2" />
-    <xacro:leg name="leg3" />
-    <xacro:leg name="leg4" />
+    <!-- Four legs: tangent to sides and fully under top -->
+    <xacro:leg name="leg1" x="${ x_off}"  y="${ y_off}"/>
+    <xacro:leg name="leg2" x="${ x_off}"  y="${-y_off}"/>
+    <xacro:leg name="leg3" x="${-x_off}"  y="${ y_off}"/>
+    <xacro:leg name="leg4" x="${-x_off}"  y="${-y_off}"/>
 
   </xacro:macro>
+
 </robot>
+
